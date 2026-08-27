@@ -6,3 +6,10 @@ __pycache__/
 venv/
 node_modules/
 *.log
+
+# Hassas / runtime
+data/
+probe_files/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
