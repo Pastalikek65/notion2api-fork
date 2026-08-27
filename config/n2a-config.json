@@ -2,12 +2,12 @@
   "host": "127.0.0.1",
   "port": 8787,
   "api_key": "change-me-openai-key",
-  "upstream_base_url": "https://www.notion.so",
-  "upstream_origin": "https://www.notion.so",
+  "upstream_base_url": "https://app.notion.com",
+  "upstream_origin": "https://app.notion.com",
   "proxy_mode": "off",
   "model_id": "auto",
   "default_model": "auto",
-  "active_account": "aydinisik@proton.me",
+  "active_account": "aydinisik2@proton.me",
   "timeout_sec": 180,
   "poll_interval_sec": 1.5,
   "poll_max_rounds": 40,
@@ -44,6 +44,14 @@
     "timeout_sec": 120
   },
   "accounts": [
+    {
+      "email": "aydinisik2@proton.me",
+      "user_id": "3c9d872b-594c-8194-a0a0-000212ad4d30",
+      "user_name": "Aydin2",
+      "space_id": "5dfe12e8-2d8a-8177-bd5b-0003496b3b54",
+      "probe_path": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik2_proton_me/probe.json",
+      "active": true
+    },
     {
       "email": "aydinisik@proton.me",
       "user_id": "3c9d872b-594c-81f8-9d1d-0002b2dd00ec",

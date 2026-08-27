@@ -13,3 +13,8 @@ probe_files/
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
+
+# Binaries
+bin/
+*.bak
+tmp_*
