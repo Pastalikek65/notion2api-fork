@@ -1,0 +1,253 @@
+#!/usr/bin/env python3
+"""
+Notion2API Manager — CLI launcher + account manager
+Usage:
+  ./n2a-cli              -> interactive menu
+  ./n2a-cli start        -> start server background
+  ./n2a-cli stop         -> stop server
+  ./n2a-cli status       -> server + account status
+  ./n2a-cli accounts     -> list all accounts
+  ./n2a-cli add <email>  -> add account
+  ./n2a-cli add-verify <email> <code> -> verify account
+  ./n2a-cli remove <email> -> remove account
+"""
+
+import sys
+import os
+import time
+import json
+import subprocess
+import signal
+from pathlib import Path
+
+BASE = Path(__file__).parent.resolve()
+BIN = BASE / 'bin'
+CONFIG = BASE / 'config' / 'n2a-config.json'
+SCRIPTS = BASE / 'scripts'
+PIDFILE = BASE / '.server.pid'
+
+# Rich CLi icin renkli cikti
+try:
+    from rich.console import Console
+    from rich.table import Table
+    from rich.panel import Panel
+    from rich.prompt import Prompt, IntPrompt, Confirm
+    from rich.layout import Layout
+    from rich.live import Live
+    from rich.text import Text
+    RICH = True
+except ImportError:
+    RICH = False
+    # fallback
+    class Console:
+        def print(self, *a, **kw): print(' '.join(str(x) for x in a))
+        def out(self, *a): print(*a)
+
+def console():
+    return Console() if RICH else Console()
+
+def load_config():
+    if CONFIG.exists():
+        return json.loads(CONFIG.read_text())
+    return {"accounts": {}, "models": {}, "server": {"port": 8787}}
+
+def save_config(cfg):
+    CONFIG.parent.mkdir(parents=True, exist_ok=True)
+    CONFIG.write_text(json.dumps(cfg, indent=2))
+
+def get_server_pid():
+    if PIDFILE.exists():
+        try:
+            pid = int(PIDFILE.read_text().strip())
+            os.kill(pid, 0)
+            return pid
+        except (ValueError, OSError, ProcessLookupError):
+            PIDFILE.unlink(missing_ok=True)
+    return None
+
+def server_status():
+    pid = get_server_pid()
+    if pid:
+        port = load_config().get('server', {}).get('port', 8787)
+        return f"running (PID {pid}, port {port})"
+    return "stopped"
+
+def start_server():
+    pid = get_server_pid()
+    if pid:
+        console().print("[yellow]Server already running.[/yellow]")
+        return
+    port = load_config().get('server', {}).get('port', 8787)
+    bin_path = BIN / 'notion2api'
+    if not bin_path.exists():
+        console().print(f"[red]Binary not found: {bin_path}[/red]")
+        return
+    cfg = load_config()
+    env = os.environ.copy()
+    env['N2A_CONFIG'] = str(CONFIG)
+    proc = subprocess.Popen(
+        [str(bin_path), '-addr', f'127.0.0.1:{port}'],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        env=env,
+        start_new_session=True
+    )
+    PIDFILE.write_text(str(proc.pid))
+    time.sleep(1)
+    live = os.kill(proc.pid, 0)
+    if live is None or True:
+        console().print(f"[green]Server started on port {port} (PID {proc.pid})[/green]")
+    else:
+        console().print("[red]Server failed to start[/red]")
+
+def stop_server():
+    pid = get_server_pid()
+    if not pid:
+        console().print("[yellow]No server running.[/yellow]")
+        return
+    os.kill(pid, signal.SIGTERM)
+    try:
+        os.waitpid(pid, 0)
+    except ChildProcessError:
+        pass
+    PIDFILE.unlink(missing_ok=True)
+    console().print(f"[green]Server stopped (PID {pid}).[/green]")
+
+def list_accounts():
+    cfg = load_config()
+    accounts = cfg.get('accounts', {})
+    if RICH:
+        table = Table(title="Notion Accounts")
+        table.add_column("Email", style="cyan")
+        table.add_column("Status", style="magenta")
+        table.add_column("Space ID")
+        table.add_column("Added")
+        for email, acc in sorted(accounts.items()):
+            status = "✅ active" if acc.get('session') else "⏳ pending"
+            sid = acc.get('space_id', '')[:12] + "..." if acc.get('space_id', '') else ""
+            added = acc.get('added', '')[:10]
+            table.add_row(email, status, sid, added)
+        console().print(table)
+    else:
+        console().print(f"Accounts ({len(accounts)}):")
+        for email, acc in sorted(accounts.items()):
+            console().print(f"  {email}: {'active' if acc.get('session') else 'pending'}")
+    return accounts
+
+def add_account(email=None):
+    if not email:
+        email = Prompt.ask("Email")
+    if not email or '@' not in email:
+        console().print("[red]Invalid email[/red]")
+        return
+    # Run helper script
+    helper = SCRIPTS / 'n2a-account.py'
+    if not helper.exists():
+        console().print(f"[red]Helper script not found: {helper}[/red]")
+        return
+    console().print(f"[cyan]Starting account add for {email}...[/cyan]")
+    console().print("[yellow]Check your email for a 6-digit code.[/yellow]")
+    result = subprocess.run(
+        ['python3', str(helper), 'start', email],
+        capture_output=True, text=True
+    )
+    console().print(result.stdout)
+    if result.returncode != 0:
+        console().print(f"[red]{result.stderr}[/red]")
+        return
+    # Ask for code
+    code = Prompt.ask("Verification code (6 digits)")
+    if not code or len(code) != 6:
+        console().print("[red]Invalid code[/red]")
+        return
+    result2 = subprocess.run(
+        ['python3', str(helper), 'verify', email, code],
+        capture_output=True, text=True
+    )
+    console().print(result2.stdout)
+    if result2.returncode == 0:
+        console().print(f"[green]Account {email} added successfully![/green]")
+    else:
+        console().print(f"[red]{result2.stderr}[/red]")
+
+def remove_account(email=None):
+    if not email:
+        email = Prompt.ask("Email to remove")
+    cfg = load_config()
+    if email in cfg.get('accounts', {}):
+        del cfg['accounts'][email]
+        save_config(cfg)
+        console().print(f"[green]Removed {email}[/green]")
+    else:
+        console().print(f"[red]Account not found: {email}[/red]")
+
+def show_main_menu():
+    """Interaktif TUI benzeri menü"""
+    while True:
+        console().print()
+        console().print(Panel.fit(
+            "[bold cyan]Notion2API Manager[/bold cyan]\n"
+            f"Server: {server_status()}",
+            border_style="green"
+        ))
+        console().print()
+        console().print("1.  [green]▶ Start Server[/green]")
+        console().print("2.  [red]⏹ Stop Server[/red]")
+        console().print("3.  [yellow]📋 List Accounts[/yellow]")
+        console().print("4.  [cyan]➕ Add Account[/cyan]")
+        console().print("5.  [magenta]🗑 Remove Account[/magenta]")
+        console().print("6.  [blue]🔄 Restart Server[/blue]")
+        console().print("7.  [white]❌ Exit[/white]")
+        console().print()
+        choice = Prompt.ask("Choice", choices=["1","2","3","4","5","6","7"], default="1")
+        if choice == "1":
+            start_server()
+        elif choice == "2":
+            stop_server()
+        elif choice == "3":
+            list_accounts()
+        elif choice == "4":
+            add_account()
+        elif choice == "5":
+            remove_account()
+        elif choice == "6":
+            stop_server()
+            time.sleep(1)
+            start_server()
+        elif choice == "7":
+            console().print("[yellow]Bye![/yellow]")
+            break
+
+def cli_help():
+    console().print(__doc__)
+
+def main():
+    if len(sys.argv) == 1:
+        show_main_menu()
+        return
+    cmd = sys.argv[1]
+    if cmd == 'start':
+        start_server()
+    elif cmd == 'stop':
+        stop_server()
+    elif cmd == 'status':
+        print(f"Server: {server_status()}")
+        list_accounts()
+    elif cmd == 'accounts':
+        list_accounts()
+    elif cmd == 'add':
+        email = sys.argv[2] if len(sys.argv) > 2 else None
+        add_account(email)
+    elif cmd == 'add-verify':
+        if len(sys.argv) < 4:
+            print("Usage: n2a-cli add-verify <email> <code>")
+            return
+        add_account(sys.argv[2])
+    elif cmd == 'remove':
+        email = sys.argv[2] if len(sys.argv) > 2 else None
+        remove_account(email)
+    else:
+        cli_help()
+
+if __name__ == '__main__':
+    main()

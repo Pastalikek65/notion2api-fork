@@ -1,8 +1,8 @@
-# Build artifacts
-!bin/
-*.sqlite
+*.pid
+__pycache__/
+*.pyc
+.DS_Store
+.env
+venv/
+node_modules/
 *.log
-
-# Test/config
-config/config.local.json
-probe_files/
