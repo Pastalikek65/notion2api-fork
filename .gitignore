@@ -1,0 +1,8 @@
+# Build artifacts
+!bin/
+*.sqlite
+*.log
+
+# Test/config
+config/config.local.json
+probe_files/

@@ -1,0 +1,47 @@
+{
+  "host": "127.0.0.1",
+  "port": 8787,
+  "api_key": "change-me-openai-key",
+  "upstream_base_url": "https://www.notion.so",
+  "upstream_origin": "https://www.notion.so",
+  "proxy_mode": "off",
+  "model_id": "auto",
+  "default_model": "auto",
+  "active_account": "",
+  "timeout_sec": 180,
+  "poll_interval_sec": 1.5,
+  "poll_max_rounds": 40,
+  "debug_upstream": true,
+  "stream_chunk_runes": 24,
+  "admin": {
+    "enabled": true,
+    "password": "admin",
+    "token_ttl_hours": 24
+  },
+  "storage": {
+    "sqlite_path": "/tmp/opencode/notion-pool/n2a.sqlite"
+  },
+  "limits": {
+    "max_request_body_bytes": 4194304
+  },
+  "features": {
+    "use_web_search": true,
+    "force_fresh_thread_per_request": true,
+    "writer_mode": false,
+    "enable_generate_image": false,
+    "ai_surface": "ai_module",
+    "thread_type": "workflow"
+  },
+  "session_refresh": {
+    "enabled": true,
+    "interval_sec": 900,
+    "startup_check": true,
+    "retry_on_auth_error": true,
+    "auto_switch_account": true
+  },
+  "login_helper": {
+    "sessions_dir": "/tmp/opencode/notion-pool/probe_files/notion_accounts",
+    "timeout_sec": 120
+  },
+  "accounts": []
+}
