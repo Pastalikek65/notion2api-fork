@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "status": "ready",
+  "email": "aydinisik@proton.me",
+  "profile_dir": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik_proton_me",
+  "pending_state_path": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik_proton_me/pending_login.json",
+  "storage_state_path": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik_proton_me/storage_state.json",
+  "probe_path": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik_proton_me/probe.json",
+  "user_id": "3c9d872b-594c-81f8-9d1d-0002b2dd00ec",
+  "user_name": "Aydın ışık",
+  "space_id": "14c00f50-fac3-81dc-a1f5-00034e5a5557",
+  "space_view_id": "3c900f50-fac3-81b4-b8fc-000637b2d7bc",
+  "space_name": "Aydın ışık's Space",
+  "client_version": "23.13.20260827.0753",
+  "title": "Notion",
+  "message": "session refreshed",
+  "updated_at": "2026-08-27T14:26:44+03:00",
+  "last_login_at": "2026-08-27T14:26:44+03:00"
+}

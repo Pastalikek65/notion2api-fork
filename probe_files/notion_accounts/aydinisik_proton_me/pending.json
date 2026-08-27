@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "status": "ready",
+  "email": "aydinisik@proton.me",
+  "profile_dir": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik_proton_me",
+  "pending_state_path": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik_proton_me/pending.json",
+  "storage_state_path": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik_proton_me/storage.json",
+  "probe_path": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik_proton_me/probe.json",
+  "user_id": "3c9d872b-594c-81f8-9d1d-0002b2dd00ec",
+  "user_name": "Aydın ışık",
+  "space_id": "14c00f50-fac3-81dc-a1f5-00034e5a5557",
+  "space_view_id": "3c900f50-fac3-81b4-b8fc-000637b2d7bc",
+  "client_version": "23.13.20260827.0753",
+  "current_url": "https://www.notion.so/",
+  "final_url": "https://www.notion.so/",
+  "title": "Notion",
+  "message": "login verified",
+  "updated_at": "2026-08-27T14:26:16+03:00",
+  "last_login_at": "2026-08-27T14:26:16+03:00",
+  "login_options_token": "v02:login_options:XkiqRx3NfBDFAz67nWbDZNqdy-Q0tgvrHG3oXByH-daAUhuODdprjbP1Es_zdsFMcDEsq4n6RfI1AAClEBLmg0ebyGiLUA4sWKqpjC327KYfzhbndDVl_Yjgw452na27b4plIu1-MgVhHhpOB3USAHgp-D5T3o73rwSaZRj7fkfC8Q2WmytGnU7yYGLzkpVRSwqbHcA",
+  "csrf_state": "v02:temp_password:c9cVZ9dGmdlSEPiyaND1sl-XQPV10G6t4nr_NZobwVBKp992UfzsLB8apJNHPxQZ8KWUxIBfaKOr5YpFi4TQ1X2zbLrQVYXL7hyTNjfuzxnTAsNJ-cy7f4BxBSzV5IjP-vFoSlfVxXLklXt6bYJyooniaV4n5trQNTD-cyKzH0fgtEqW1hSg8ZYibb2H9hxLqA8ZCaQnsDMOhykXYcJvap78jWzGeDnODUS4DI5AXWjO",
+  "device_id": "a7f1f83d-e4b4-477b-a75a-61db99ebafb7"
+}

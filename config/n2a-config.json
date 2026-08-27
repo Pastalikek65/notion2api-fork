@@ -1,21 +1,56 @@
 {
-  "accounts": {},
-  "models": {
-    "auto": {},
-    "gpt-5.2": { "model": "gpt-5.2" },
-    "gpt-5.4": { "model": "gpt-5.4" },
-    "claude-sonnet-4.6": { "model": "claude-sonnet-4.6" },
-    "claude-sonnet-4.7": { "model": "claude-sonnet-4.7" },
-    "claude-opus-4.6": { "model": "claude-opus-4.6" },
-    "claude-opus-4.7": { "model": "claude-opus-4.7" },
-    "claude-haiku-4.5": { "model": "claude-haiku-4.5" },
-    "gemini-3.1-pro": { "model": "gemini-3.1-pro" },
-    "gemini-3.1-flash": { "model": "gemini-3.1-flash" },
-    "grok-4.5": { "model": "grok-4.5" },
-    "kimi-k3": { "model": "kimi-k3" }
+  "host": "127.0.0.1",
+  "port": 8787,
+  "api_key": "change-me-openai-key",
+  "upstream_base_url": "https://www.notion.so",
+  "upstream_origin": "https://www.notion.so",
+  "proxy_mode": "off",
+  "model_id": "auto",
+  "default_model": "auto",
+  "active_account": "aydinisik@proton.me",
+  "timeout_sec": 180,
+  "poll_interval_sec": 1.5,
+  "poll_max_rounds": 40,
+  "debug_upstream": false,
+  "stream_chunk_runes": 24,
+  "admin": {
+    "enabled": true,
+    "password": "admin",
+    "token_ttl_hours": 24
   },
-  "server": {
-    "port": 8787,
-    "host": "127.0.0.1"
-  }
+  "storage": {
+    "sqlite_path": "/tmp/opencode/notion2api-fork/data/n2a.sqlite"
+  },
+  "limits": {
+    "max_request_body_bytes": 4194304
+  },
+  "features": {
+    "use_web_search": true,
+    "force_fresh_thread_per_request": true,
+    "writer_mode": false,
+    "enable_generate_image": false,
+    "ai_surface": "ai_module",
+    "thread_type": "workflow"
+  },
+  "session_refresh": {
+    "enabled": true,
+    "interval_sec": 900,
+    "startup_check": true,
+    "retry_on_auth_error": true,
+    "auto_switch_account": true
+  },
+  "login_helper": {
+    "sessions_dir": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts",
+    "timeout_sec": 120
+  },
+  "accounts": [
+    {
+      "email": "aydinisik@proton.me",
+      "user_id": "3c9d872b-594c-81f8-9d1d-0002b2dd00ec",
+      "user_name": "Aydın ışık",
+      "space_id": "14c00f50-fac3-81dc-a1f5-00034e5a5557",
+      "probe_path": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik_proton_me/probe.json",
+      "active": true
+    }
+  ]
 }

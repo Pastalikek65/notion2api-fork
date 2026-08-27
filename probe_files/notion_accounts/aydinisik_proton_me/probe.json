@@ -1,0 +1,67 @@
+{
+  "email": "aydinisik@proton.me",
+  "user_id": "3c9d872b-594c-81f8-9d1d-0002b2dd00ec",
+  "user_name": "Aydın ışık",
+  "space_id": "14c00f50-fac3-81dc-a1f5-00034e5a5557",
+  "space_view_id": "3c900f50-fac3-81b4-b8fc-000637b2d7bc",
+  "space_name": "Aydın ışık's Space",
+  "client_version": "23.13.20260827.0753",
+  "cookies": [
+    {
+      "name": "NEXT_LOCALE",
+      "value": "en-US"
+    },
+    {
+      "name": "__cf_bm",
+      "value": "iqU3zp9XgOBTtkyHHYp5xmXFm2Zwp52C9fywzSw3FcA-1787829881.3681424-1.0.1.1-bLcWqxhQNJCkA6t9HpvngJLGJo4XjGvY9hAmCy4p4H8aqlsI2s9jReUqyAhPsETc0c8p.eZBAxq7SPwZOccg8oIkYn61DkoRbVPmCUTG3XCOKzljq0tXX1SaHCioJpIf"
+    },
+    {
+      "name": "_cfuvid",
+      "value": "q9YTwJ98tcljLnJdb1gn42fWoi21n.r07Osc5gRgOTM-1787829881.3681424-1.0.1.1-VHNqL6uYmLNYsnpKxLiFkEoaNbj3RNIGfzCLDRdRJOg"
+    },
+    {
+      "name": "cf_redirect_migration",
+      "value": "eligible"
+    },
+    {
+      "name": "cf_redirect_sub_tier",
+      "value": "0"
+    },
+    {
+      "name": "csrf",
+      "value": "d4181429-4d4c-474a-a690-18216fe8127a"
+    },
+    {
+      "name": "device_id",
+      "value": "a7f1f83d-e4b4-477b-a75a-61db99ebafb7"
+    },
+    {
+      "name": "notion_browser_id",
+      "value": "285ceff5-183d-4a17-bb18-840f88be6c9e"
+    },
+    {
+      "name": "notion_check_cookie_consent",
+      "value": "true"
+    },
+    {
+      "name": "notion_locale",
+      "value": "en-US%2Fautodetect"
+    },
+    {
+      "name": "notion_user_id",
+      "value": "3c9d872b-594c-81f8-9d1d-0002b2dd00ec"
+    },
+    {
+      "name": "notion_users",
+      "value": "%5B%223c9d872b-594c-81f8-9d1d-0002b2dd00ec%22%5D"
+    },
+    {
+      "name": "p_sync_session",
+      "value": "%7B%22tokenId%22%3A%22v02%3Async_session%3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaT9SiaS8tFg0fhUZwAJD-bu9h-MytbYGKknbSPCj2F07ufgzyXJLL81aIK3wLdDUjS9hhjqtmMaHlpth2oxLFnGCg5XugLF8bwVt%22%2C%22userIds%22%3A%5B%223c9d872b-594c-81f8-9d1d-0002b2dd00ec%22%5D%7D"
+    },
+    {
+      "name": "token_v2",
+      "value": "v03%3AeyJhbGciOiJkaXIiLCJraWQiOiJwcm9kdWN0aW9uOnRva2VuLXYzOjIwMjQtMTEtMDciLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIn0..4A6IdBQmYrew7C36t7BtaA.H0iHLcUPKj1TNatpJNJYR85Pzad8ycFjiKehDnp_KYGtHj000B3vYSxV7LsXnCtUIaw0tJUqjNrq9tcKGg50JnESw3q5VHnKXa3UWHEujfE6sOSN4EZQPR9I8iSVH6VcxFGSB1P8-Xca220dDw3Rw6T6YkKCLVWvBtlV1l-iMxBg2WErOBP_biYYdfOXkAzNYUlXV3JLWCa6cTy7XpsGE-WSQdj29M0_SdihJ8Ftep_3E850Qeu2uCxGT9TPBBoKRNn4bfB3cNlBw371YtgGN1Z0bfgAssviNWuGbEbvE9rtLLfg_odY1UlCj1QN0BGh_eXKBrZ8CMq12x8zFSxUTfNr6ejIUVeFq5XpElbbo6g.LtBeq45LyshV5hQkZnHshBXIjyU8Fs-gYshwCa1Amms"
+    }
+  ]
+}

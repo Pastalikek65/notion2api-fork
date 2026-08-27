@@ -24,9 +24,9 @@ import sys
 import time
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 BINARY = REPO_ROOT / "bin" / "n2a-helper"
-CONFIG = REPO_ROOT / "config" / "config.json"
+CONFIG = REPO_ROOT / "config" / "n2a-config.json"
 
 if not BINARY.exists():
     alt = REPO_ROOT / "n2a-helper"
