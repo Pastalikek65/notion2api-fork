@@ -8,9 +8,9 @@
   "model_id": "auto",
   "default_model": "auto",
   "active_account": "aydinisik2@proton.me",
-  "timeout_sec": 180,
+  "timeout_sec": 120,
   "poll_interval_sec": 1.5,
-  "poll_max_rounds": 40,
+  "poll_max_rounds": 60,
   "debug_upstream": false,
   "stream_chunk_runes": 24,
   "admin": {
@@ -49,15 +49,7 @@
       "user_id": "3c9d872b-594c-8194-a0a0-000212ad4d30",
       "user_name": "Aydin2",
       "space_id": "5dfe12e8-2d8a-8177-bd5b-0003496b3b54",
-      "probe_path": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik2_proton_me/probe.json",
-      "active": true
-    },
-    {
-      "email": "aydinisik@proton.me",
-      "user_id": "3c9d872b-594c-81f8-9d1d-0002b2dd00ec",
-      "user_name": "Aydın ışık",
-      "space_id": "14c00f50-fac3-81dc-a1f5-00034e5a5557",
-      "probe_path": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik_proton_me/probe.json",
+      "probe_json": "/tmp/opencode/notion2api-fork/probe_files/notion_accounts/aydinisik2_proton_me/probe.json",
       "active": true
     }
   ]
