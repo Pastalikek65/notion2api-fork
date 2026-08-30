@@ -18,3 +18,5 @@ probe_files/
 bin/
 *.bak
 tmp_*
+
+.venv/

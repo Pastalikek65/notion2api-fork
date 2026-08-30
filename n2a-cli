@@ -222,10 +222,22 @@ def cli_help():
     console().print(__doc__)
 
 def main():
+    # TUI'yi bash; yoksa eski menuyu goster
+    venv_python = os.path.join(os.path.dirname(__file__), '.venv', 'bin', 'python')
+    tui_script = os.path.join(os.path.dirname(__file__), 'tui.py')
+    if len(sys.argv) == 1 and os.path.exists(venv_python) and os.path.exists(tui_script):
+        os.execv(venv_python, [venv_python, tui_script])
+        return
     if len(sys.argv) == 1:
         show_main_menu()
         return
     cmd = sys.argv[1]
+    if cmd in ('tui', 'ui', '--menu'):
+        if cmd != '--menu' and os.path.exists(venv_python) and os.path.exists(tui_script):
+            os.execv(venv_python, [venv_python, tui_script])
+        else:
+            show_main_menu()
+        return
     if cmd == 'start':
         start_server()
     elif cmd == 'stop':
@@ -242,7 +254,19 @@ def main():
         if len(sys.argv) < 4:
             print("Usage: n2a-cli add-verify <email> <code>")
             return
-        add_account(sys.argv[2])
+        helper = SCRIPTS / 'n2a-account.py'
+        if not helper.exists():
+            print(f"[red]Helper script not found: {helper}[/red]")
+            return
+        result = subprocess.run(
+            ['python3', str(helper), 'verify', sys.argv[2], sys.argv[3]],
+            capture_output=True, text=True
+        )
+        print(result.stdout)
+        if result.returncode == 0:
+            print(f"[green]Account {sys.argv[2]} added successfully![/green]")
+        else:
+            print(f"[red]{result.stderr}[/red]")
     elif cmd == 'remove':
         email = sys.argv[2] if len(sys.argv) > 2 else None
         remove_account(email)

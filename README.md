@@ -1,18 +1,31 @@
-# Notion2API — CLI Launcher + Account Manager
+# Notion2API — Multi-Account AI Proxy + TUI
 
-OpenAI uyumlu API **Claude, GPT, Gemini, Grok, Kimi** modellerini tek portta sunar.
+OpenAI uyumlu API ile **Claude, GPT, Gemini** modellerini Notion AI üzerinden tek portta sunar.
+Çoklu hesap yönetimi, Textual TUI, admin dashboard.
 
 ## 🚀 Quick Start
 
 ```bash
-./n2a-cli   # interaktif menü açılır
+./n2a-cli           # Textual TUI (önerilen)
+./n2a-cli --menu    # fallback Rich menü
 ```
 
-## 📋 Komutlar
+## 📋 TUI Kullanımı
+
+Klavye kısayolları: `D` Dashboard, `A` Accounts, `S` Server, `M` Models, `R` Refresh, `Q` Quit
+
+| Ekran | İçerik |
+|-------|--------|
+| **Dashboard** | Server durumu, aktif hesap, account özeti, hızlı aksiyonlar |
+| **Accounts** | Hesap listesi, ekle/çıkar/aktifleştir/test et |
+| **Server** | Start/stop/restart, healthz detayı |
+| **Models** | Tüm modeller listesi, test |
+
+## 📋 CLI Komutları
 
 | Komut | Açıklama |
 |-------|----------|
-| `./n2a-cli` | Menü |
+| `./n2a-cli` | Textual TUI |
 | `./n2a-cli start` | Server başlat |
 | `./n2a-cli stop` | Server durdur |
 | `./n2a-cli status` | Durum + hesaplar |
@@ -21,46 +34,41 @@ OpenAI uyumlu API **Claude, GPT, Gemini, Grok, Kimi** modellerini tek portta sun
 | `./n2a-cli add-verify <email> <kod>` | Kodu gir |
 | `./n2a-cli remove <email>` | Hesap sil |
 
-## 🔧 Kurulum
+## 🔧 Hesap Ekleme (TUI ile)
 
-```bash
-./n2a-cli start          # server başlat
-./n2a-cli add mail@ornek.com  # hesap ekle
-```
-
-## 🧩 opencode.json
-
-```json
-{
-  "providers": {
-    "notion2api": {
-      "baseUrl": "http://127.0.0.1:8787/v1",
-      "models": {
-        "claude-opus-4.7": { "model": "claude-sonnet-4.7", "tool_call": true, "reasoning": true },
-        "claude-sonnet-4.6": { "model": "claude-sonnet-4.6", "tool_call": true },
-        "gpt-5.4": { "model": "gpt-5.4", "tool_call": true, "vision": true },
-        "gemini-3.1-pro": { "model": "gemini-3.1-pro", "tool_call": true, "vision": true }
-      }
-    }
-  }
-}
-```
+1. `./n2a-cli` ile TUI'yi aç
+2. `A` ile Accounts tab'a geç
+3. Email gir → **Add** → kodu bekle → gir → aktif
+4. Veya Dashboard'da **➕ Add Account** butonu
 
 ## 🗂 Dosya Yapısı
 
 ```
 .
-├── n2a-cli              # Ana CLI/TUI
+├── n2a-cli              # Ana CLI (TUI'yi açar)
+├── tui.py               # Textual TUI (Python)
+├── .venv/               # Python venv (textual, requests)
 ├── bin/
-│   ├── notion2api       # Go server (25 MB)
-│   └── n2a-helper       # Go CLI (22 MB)
-├── scripts/
-│   └── n2a-account.py   # Python account helper
+│   ├── notion2api       # Go server (17 MB)
+│   └── n2a-helper       # Go helper
 ├── config/
 │   └── n2a-config.json  # Konfigürasyon
-├── README.md
+├── probe_files/         # Session cookie'leri
 ├── Makefile
-└── LICENSE
+└── README.md
 ```
+
+## 📡 API
+
+```
+POST /v1/chat/completions  — OpenAI uyumlu
+GET  /v1/models            — model listesi
+GET  /healthz              — server durumu
+```
+
+## ⚠️ Notion Free Plan
+
+Notion AI ücretsiz planda **75 kullanım/ay** (hesap başına). Kota dolunca `premium-feature-unavailable`.
+Yeni bir hesap ekleyerek devam edebilirsiniz (`./n2a-cli` ile TUI → Accounts → Add).
 
 Made by Kaku Dev
